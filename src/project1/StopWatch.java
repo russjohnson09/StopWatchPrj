@@ -46,33 +46,6 @@ public class StopWatch {
 	}
 
 	public StopWatch(String startTime) {
-		// int delimeter1 = startTime.indexOf(":");
-		// int delimeter2 = startTime.substring(delimeter1 + 1).indexOf(":");
-		// if (delimeter1 == -1) {
-		// int milliseconds = Integer.valueOf(startTime);
-		// this.minutes = milliseconds / 60000;
-		// this.seconds = milliseconds / 1000;
-		// this.milliseconds = milliseconds % 1000;
-		//
-		// } else if (delimeter2 == -1) {
-		// int seconds = Integer.valueOf(startTime.substring(0, delimeter1));
-		// int milliseconds = Integer.valueOf(startTime
-		// .substring(delimeter1 + 1));
-		// this.minutes = milliseconds / 60000 + seconds / 60;
-		// this.seconds = seconds % 60 + milliseconds / 1000;
-		// this.milliseconds = milliseconds % 1000;
-		//
-		// } else {
-		// int minutes = Integer.valueOf(startTime.substring(0, delimeter1));
-		// int seconds = Integer.valueOf(startTime.substring(delimeter1 + 1,
-		// delimeter2));
-		// int milliseconds = Integer.valueOf(startTime
-		// .substring(delimeter2 + 1));
-		// this.minutes = minutes + seconds / 60 + milliseconds / 60000;
-		// this.seconds = seconds % 60 + milliseconds / 1000;
-		// this.milliseconds = milliseconds % 1000;
-		//
-		// }
 		Scanner sc = new Scanner(startTime).useDelimiter(":");
 		ArrayList<Integer> a1 = new ArrayList<Integer>(3);
 		while (sc.hasNextInt()) {
@@ -151,31 +124,6 @@ public class StopWatch {
 
 		}
 	}
-
-	// try {
-	//
-	// BufferedWriter out = new BufferedWriter(new FileWriter(
-	// "outfilename"));
-	// out.write("aString");
-	// out.close();
-	//
-	// // JFileChooser chooser = new JFileChooser();
-	// // int status = chooser.showOpenDialog(null);
-	// // File file = chooser.getSelectedFile();
-	// // Scanner scan = new Scanner(file);
-	// // String info = "";
-	// //
-	// // PrintWriter out = null;
-	// //
-	// // out = new PrintWriter(new BufferedWriter(new FileWriter(
-	// // "population.txt")));
-	// // out.println("ANCHORAGE" + " " + "25600");
-	// // out.close();
-	// } catch (IOException error) {
-	// System.out.println("Oops!");
-	// }
-	//
-	// }
 
 	public void load() throws IOException {
 		JFileChooser chooser = new JFileChooser();
@@ -259,29 +207,6 @@ public class StopWatch {
 		frame.getContentPane().add(new TimerListener());
 		frame.pack();
 		frame.setVisible(true);
-		//
-		// TimerListener tl1 = new TimerListener();
-		//
-		// Timer timer = new Timer();
-		//
-		// // TO DO:
-		// // create a TimeListener object
-		// // create a Timer object appropriately
-		// // start the Timer object
-		//
-		// // use the following to stop the timer
-		// Scanner scan = new Scanner(System.in);
-		// System.out.println("Hit any Key to stop the timer:");
-		// scan.nextLine();
-		// timer.stop();
-
-		// int delay = 1000; //milliseconds
-		// ActionListener taskPerformer = new ActionListener() {
-		// public void actionPerformed(ActionEvent evt) {
-		// System.out.println('H"');
-		// }
-		// };
-		// new Timer(delay, taskPerformer).start();
 
 	}
 }
