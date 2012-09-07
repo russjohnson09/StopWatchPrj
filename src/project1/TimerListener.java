@@ -32,7 +32,7 @@ public class TimerListener extends JPanel {
 		start = new JButton("Start");
 		ButtonListener listener = new ButtonListener();
 		start.addActionListener(listener);
-		label = new JLabel("00:00:000");
+		label = new JLabel("0:00:000");
 		buttonPanel = new JPanel();
 		buttonPanel.setPreferredSize(new Dimension(200, 40));
 		buttonPanel.setBackground(Color.blue);
@@ -41,7 +41,7 @@ public class TimerListener extends JPanel {
 		setBackground(Color.cyan);
 		add(label);
 		add(buttonPanel);
-		timer = new Timer(500, actionListener);
+		timer = new Timer(500, new CycleListener());
 		watch = new StopWatch();
 		hasrun = false;
 	}
@@ -52,6 +52,17 @@ public class TimerListener extends JPanel {
 			watch.add(500);
 		}
 	};
+
+	private class CycleListener implements ActionListener {
+		// -----------------------------------------------------------------
+		// Updates the position of the image and possibly the direction
+		// of movement whenever the timer fires an action event.
+		// -----------------------------------------------------------------
+		public void actionPerformed(ActionEvent event) {
+			watch.add(500);
+			label.setText(watch.toString());
+		}
+	}
 
 	private class ButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent event) {
