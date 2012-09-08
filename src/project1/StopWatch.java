@@ -15,34 +15,45 @@ public class StopWatch {
 	private int minutes;
 	private int seconds;
 	private int milliseconds;
-	private static int numbercreated = 0;
+	private static int numbercreated;
+
+	/* The following ArrayList is neccessary for testing the equals method. */
+	private static ArrayList<StopWatch> stopwatches = new ArrayList<StopWatch>();
+
+	public static ArrayList<StopWatch> getStopWatches() {
+		return stopwatches;
+	}
 
 	public StopWatch() {
 		minutes = 0;
 		seconds = 0;
 		milliseconds = 0;
 		numbercreated += 1;
+		stopwatches.add(this);
 	}
 
 	public StopWatch(int minutes, int seconds, int milliseconds) {
 		this.minutes = minutes + (seconds * 1000 + milliseconds) / 60000;
-		this.seconds = seconds % 60 + milliseconds / 1000;
+		this.seconds = (seconds + milliseconds / 1000) % 60;
 		this.milliseconds = milliseconds % 1000;
 		numbercreated += 1;
+		stopwatches.add(this);
 	}
 
 	public StopWatch(int seconds, int milliseconds) {
 		this.minutes = (seconds * 1000 + milliseconds) / 60000;
-		this.seconds = seconds % 60 + milliseconds / 1000;
+		this.seconds = (seconds + milliseconds / 1000) % 60;
 		this.milliseconds = milliseconds % 1000;
 		numbercreated += 1;
+		stopwatches.add(this);
 	}
 
 	public StopWatch(int milliseconds) {
 		this.minutes = milliseconds / 60000;
-		this.seconds = milliseconds / 1000;
+		this.seconds = (milliseconds / 1000) % 60;
 		this.milliseconds = milliseconds % 1000;
 		numbercreated += 1;
+		stopwatches.add(this);
 	}
 
 	public StopWatch(String startTime) {
@@ -71,6 +82,7 @@ public class StopWatch {
 			this.milliseconds = milliseconds % 1000;
 		}
 		numbercreated += 1;
+		stopwatches.add(this);
 	}
 
 	public boolean equals(StopWatch other) {
@@ -182,25 +194,6 @@ public class StopWatch {
 	}
 
 	public static void main(String[] args) {
-
-		StopWatch s3 = new StopWatch(0, 0, 0);
-		for (int i = 0; i < 1005; i++) {
-			s3.add(1);
-		}
-		s3.add(2004);
-		System.out.println(s3);
-
-		StopWatch s1 = new StopWatch(5, 59, 300);
-		s1.add(2000);
-		System.out.println(s1);
-
-		s1 = new StopWatch("8:01:600");
-
-		for (int i = 0; i < 15000; i++) {
-			s1.inc();
-		}
-
-		System.out.println(s1);
 
 		JFrame frame = new JFrame("Stop Watch");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
