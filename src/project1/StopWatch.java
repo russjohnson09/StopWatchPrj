@@ -1,9 +1,10 @@
-/*****************************************************************
-Class that manages the StopWatch object.
-
-@author Russ Johnson
-@version 9.10.2012
- *****************************************************************/
+/*******************************************************************************
+ * Representation of stopwatch with milliseconds, seconds, and minutes.
+ * 
+ * 
+ * @author Russ Johnson
+ * @version 9.10.2012
+ *******************************************************************************/
 package project1;
 
 import java.io.BufferedWriter;
@@ -31,17 +32,12 @@ public class StopWatch {
 	/* number of StopWatch objects created */
 	private static int numbercreated;
 
-	/* The following ArrayList is necessary for testing the equals method. */
+	/* ArrayList necessary for testing the equals method */
 	private static ArrayList<StopWatch> stopwatches = new ArrayList<StopWatch>();
 
-	public static ArrayList<StopWatch> getStopWatches() {
-		return stopwatches;
-	}
-
-	/*
-	 * Constructor class taking no arguments. Sets everything to zero, increases
-	 * number created and adds this StopWatch to stopwatches ArrayList.
-	 */
+	/*************************************************************************
+	 * Default constructor creates a stopwatch with no time.
+	 *************************************************************************/
 	public StopWatch() {
 		minutes = 0;
 		seconds = 0;
@@ -50,10 +46,17 @@ public class StopWatch {
 		stopwatches.add(this);
 	}
 
-	/*
-	 * Constructor class that sets values for minutes, seconds, and
-	 * milliseconds. Also deals with overflow for milliseconds and seconds.
-	 */
+	/*************************************************************************
+	 * Constructor creates a StopWatch object with minutes, seconds, and
+	 * milliseconds.
+	 * 
+	 * @param minutes
+	 *            minutes in stopwatch
+	 * @param seconds
+	 *            seconds in stopwatch
+	 * @param milliseconds
+	 *            milliseconds in stopwatch
+	 *************************************************************************/
 	public StopWatch(int minutes, int seconds, int milliseconds) {
 		this.minutes = minutes + (seconds * 1000 + milliseconds) / 60000;
 		this.seconds = (seconds + milliseconds / 1000) % 60;
@@ -62,10 +65,15 @@ public class StopWatch {
 		stopwatches.add(this);
 	}
 
-	/*
-	 * Constructor class that sets values for seconds and milliseconds. Also
-	 * deals with overflow for milliseconds and seconds.
-	 */
+	/*************************************************************************
+	 * Constructor creates a StopWatch object with seconds and milliseconds.
+	 * 
+	 * @param seconds
+	 *            seconds in stopwatch
+	 * @param milliseconds
+	 *            milliseconds in stopwatch
+	 * 
+	 *************************************************************************/
 	public StopWatch(int seconds, int milliseconds) {
 		this.minutes = (seconds * 1000 + milliseconds) / 60000;
 		this.seconds = (seconds + milliseconds / 1000) % 60;
@@ -74,10 +82,12 @@ public class StopWatch {
 		stopwatches.add(this);
 	}
 
-	/*
-	 * Constructor class that sets milliseconds. Also deals with overflow for
-	 * milliseconds and seconds.
-	 */
+	/*************************************************************************
+	 * Constructor creates a StopWatch object with milliseconds
+	 * 
+	 * @param milliseconds
+	 *            milliseconds in stopwatch
+	 *************************************************************************/
 	public StopWatch(int milliseconds) {
 		this.minutes = milliseconds / 60000;
 		this.seconds = (milliseconds / 1000) % 60;
@@ -86,10 +96,13 @@ public class StopWatch {
 		stopwatches.add(this);
 	}
 
-	/*
-	 * Constructor that uses a string formated as 0:00:00, 00:00, or 00 and sets
-	 * the minutes,
-	 */
+	/*************************************************************************
+	 * Constructor creates a StopWatch object with minutes, seconds and
+	 * milliseconds based on a string.
+	 * 
+	 * @param startTime
+	 *            string that contains time delimited by :
+	 *************************************************************************/
 	public StopWatch(String startTime) {
 		Scanner sc = new Scanner(startTime).useDelimiter(":");
 		ArrayList<Integer> a1 = new ArrayList<Integer>(3);
@@ -119,19 +132,34 @@ public class StopWatch {
 		stopwatches.add(this);
 	}
 
-	/* Tests two StopWatch objects for equality. */
+	/*************************************************************************
+	 * Tests two StopWatch objects for equality defined as having the same
+	 * milliseconds, seconds, and minutes.
+	 * 
+	 * @param other
+	 *            the stopwatch that this one is being compared to
+	 *************************************************************************/
 	public boolean equals(StopWatch other) {
 		return other.milliseconds == milliseconds && other.seconds == seconds
 				&& other.minutes == minutes;
 	}
 
-	/* Returns the total milliseconds. */
+	/*************************************************************************
+	 * Returns the total milliseconds.
+	 *************************************************************************/
 	public int totalMilliseconds() {
 		return milliseconds + seconds * 1000 + minutes * 60000;
 	}
 
-	/* Returns the total milliseconds. */
+	/*************************************************************************
+	 * Compares two stopwatches. If this one is larger than the other return 1.
+	 * If this one is smaller return -1. Else (if equal) return 0.
+	 * 
+	 * @param other
+	 *            the stopwatch that this one is being compared to
+	 *************************************************************************/
 	public int compareTo(StopWatch other) {
+
 		if (other.totalMilliseconds() < totalMilliseconds())
 			return 1;
 		if (other.totalMilliseconds() > totalMilliseconds())
@@ -140,28 +168,64 @@ public class StopWatch {
 		return 0;
 	}
 
+	/*************************************************************************
+	 * Adds some number of milliseconds to the stopwatch.
+	 * 
+	 * @param milliseconds
+	 *            milliseconds being added
+	 * @return none
+	 *************************************************************************/
 	public void add(int milliseconds) {
+
 		setMilliseconds(this.milliseconds + milliseconds);
 	}
 
+	/*************************************************************************
+	 * Adds this stopwatch to some other stopwatch.
+	 * 
+	 * @param other
+	 *            stopwatch added to this stopwatch
+	 * @return none
+	 *************************************************************************/
 	public void add(StopWatch other) {
+
 		add(other.totalMilliseconds());
 	}
 
+	/*************************************************************************
+	 * Increments the stopwatch by 1 millisecond (calls add with milliseconds
+	 * equal to one).
+	 * 
+	 * @return none
+	 *************************************************************************/
 	public void inc() {
+
 		add(1);
 	}
 
+	/*************************************************************************
+	 * Converts the stopwatch to a string.
+	 * 
+	 * @return String
+	 *************************************************************************/
 	public String toString() {
+
 		return minutes + ":" + String.format("%02d", seconds) + ":"
 				+ String.format("%03d", milliseconds);
 	}
 
+	/*************************************************************************
+	 * Saves the stopwatch to a user selected file.
+	 * 
+	 * @return none
+	 * @throws IOException
+	 *************************************************************************/
 	public void save() throws IOException {
-		PrintWriter out = null;
 
+		PrintWriter out = null;
 		JFileChooser chooser = new JFileChooser();
 		int status = chooser.showOpenDialog(null);
+
 		if (status != JFileChooser.APPROVE_OPTION)
 			System.out.println("No File Chosen");
 		else {
@@ -174,9 +238,18 @@ public class StopWatch {
 		}
 	}
 
+	/*************************************************************************
+	 * Loads a stopwatch to a user selected file.
+	 * 
+	 * @return none
+	 * @throws IOException
+	 *************************************************************************/
 	public void load() throws IOException {
+
 		JFileChooser chooser = new JFileChooser();
+
 		int status = chooser.showOpenDialog(null);
+
 		if (status != JFileChooser.APPROVE_OPTION)
 			System.out.println("No File Chosen");
 		else {
@@ -188,6 +261,12 @@ public class StopWatch {
 			setSeconds(scan.nextInt());
 			setMilliseconds(scan.nextInt());
 		}
+	}
+
+	// The Following are getter or setter methods.
+
+	public static ArrayList<StopWatch> getStopWatches() {
+		return stopwatches;
 	}
 
 	public static int getNumberCreated() {
