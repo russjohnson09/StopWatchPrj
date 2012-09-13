@@ -1,3 +1,9 @@
+/*****************************************************************
+Class that manages both the GUI and the TimerListener.
+
+@author Russ Johnson
+@version 9.10.2012
+ *****************************************************************/
 package project1;
 
 /*
@@ -20,6 +26,7 @@ import javax.swing.Timer;
 
 public class TimerListener extends JPanel {
 
+	private final int WAIT;
 	private JButton start;
 	private JLabel label;
 	private JPanel buttonPanel;
@@ -29,6 +36,7 @@ public class TimerListener extends JPanel {
 	private boolean hasrun;
 
 	public TimerListener() {
+		WAIT = 16;
 		start = new JButton("Start");
 		ButtonListener listener = new ButtonListener();
 		start.addActionListener(listener);
@@ -41,7 +49,7 @@ public class TimerListener extends JPanel {
 		setBackground(Color.cyan);
 		add(label);
 		add(buttonPanel);
-		timer = new Timer(500, new CycleListener());
+		timer = new Timer(WAIT, new CycleListener());
 		watch = new StopWatch();
 		hasrun = false;
 	}
@@ -49,7 +57,7 @@ public class TimerListener extends JPanel {
 	ActionListener actionListener = new ActionListener() {
 		public void actionPerformed(ActionEvent actionEvent) {
 			label.setText(watch.toString());
-			watch.add(500);
+			watch.add(WAIT);
 		}
 	};
 
@@ -59,7 +67,7 @@ public class TimerListener extends JPanel {
 		// of movement whenever the timer fires an action event.
 		// -----------------------------------------------------------------
 		public void actionPerformed(ActionEvent event) {
-			watch.add(500);
+			watch.add(WAIT);
 			label.setText(watch.toString());
 		}
 	}

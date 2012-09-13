@@ -1,3 +1,9 @@
+/*****************************************************************
+JUnit for the StopWatch class.
+
+@author Russ Johnson
+@version 9.10.2012
+ *****************************************************************/
 package project1;
 
 import static org.junit.Assert.assertEquals;
