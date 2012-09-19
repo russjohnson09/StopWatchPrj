@@ -286,6 +286,7 @@ public class StopWatch {
 	}
 
 	public void setSeconds(int seconds) {
+
 		if (seconds > 59) {
 			this.seconds = seconds % 60;
 			this.minutes = this.minutes + (seconds / 60);
@@ -301,6 +302,7 @@ public class StopWatch {
 	}
 
 	public void setMilliseconds(int milliseconds) {
+
 		if (milliseconds > 999) {
 			this.milliseconds = milliseconds % 1000;
 			setSeconds(this.seconds + (milliseconds / 1000));
@@ -309,6 +311,15 @@ public class StopWatch {
 		}
 	}
 
+	/*************************************************************************
+	 * Driver for the StopWatch. Very inefficient. Have to check line by line to
+	 * confirm that it is correct. To speed things up slightly I made most of
+	 * them read "returned value = expected value."
+	 * 
+	 * Also starts up the GUI.
+	 * 
+	 * @return none
+	 *************************************************************************/
 	public static void main(String[] args) {
 
 		StopWatch s = new StopWatch("20:10:8");
@@ -407,7 +418,7 @@ public class StopWatch {
 
 		JFrame frame = new JFrame("Stop Watch");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().add(new TimerListener());
+		frame.getContentPane().add(new TimerListener(612));
 		frame.pack();
 		frame.setVisible(true);
 
